@@ -7,24 +7,20 @@ void Task_Report_init(void) {
 }
 
 void Task_Report(void) {
-    Serial.println("========================================");
-    Serial.println("         10s STATISTICS REPORT         ");
-    Serial.println("========================================");
-    Serial.print("  Total presses   : "); Serial.println(g_totalPresses);
-    Serial.print("  Short (<500ms)  : "); Serial.println(g_shortPresses);
-    Serial.print("  Long  (>=500ms) : "); Serial.println(g_longPresses);
+    printf("========================================\n");
+    printf("         10s STATISTICS REPORT         \n");
+    printf("========================================\n");
+    printf("  Total presses   : %lu\n", g_totalPresses);
+    printf("  Short (<500ms)  : %lu\n", g_shortPresses);
+    printf("  Long  (>=500ms) : %lu\n", g_longPresses);
 
     if (g_totalPresses > 0) {
-        unsigned long avg = (g_sumShortDuration + g_sumLongDuration)
-                            / g_totalPresses;
-        Serial.print("  Avg duration    : ");
-        Serial.print(avg);
-        Serial.println("ms");
+    unsigned long avg = (g_sumShortDuration + g_sumLongDuration) / g_totalPresses;
+    printf("  Avg duration    : %lums\n", avg);
     } else {
-        Serial.println("  Avg duration    : N/A");
+        printf("  Avg duration    : N/A\n");
     }
-
-    Serial.println("========================================");
+    printf("========================================\n");
 
     // reset all stats after report
     g_totalPresses     = 0;

@@ -46,14 +46,23 @@ void loop() {
 
 // Create instances of peripherals
 KeypadController keypad;                // Keypad input
-LCD lcd(A0, A1, A2, A3, A4, A5);       // LCD output (pins A0–A5)
+LCD lcd(0x3F);   // ✅ I2C version
 LedControl redLed(12);                  // Red LED for wrong code
 LedControl greenLed(11);                // Green LED for correct code
 
+static int col = 0;
+static int row = 0;
+
+// Helper: clears LCD and resets software cursor
+void lcdClear() {
+    lcd.clear();
+    col = 0;
+    row = 0;
+}
+
 // Function to send characters to the LCD, used by STDIO
 int LcdPutChar(char c, FILE *f) {
-    static int col = 0;
-    static int row = 0;
+   
 
     // Handle newline: move to next row
     if (c == '\n') {
@@ -92,27 +101,29 @@ int KeypadGetChar(FILE *f) {
 }
 
 void setup() {
-    keypad.init(); // Initialize keypad hardware
+   
+
+    keypad.init();
 
     // Connect STDIO streams to LCD and Keypad
     FILE *my_stream = fdevopen(LcdPutChar, KeypadGetChar);
     stdin = stdout = my_stream;
 
-    lcd.clear();
+    lcdClear();
     printf("System ready.\n");  // Initial message on LCD
     delay(1000);
-    lcd.clear();
+    lcdClear();
 }
 
 void loop() {
     char input[5];  // Buffer to store 4-digit code
 
-    lcd.clear();
+    lcdClear();
     printf("Enter Code:\n");    // Prompt user
 
     scanf("%4s", input);        // Read up to 4 characters from keypad
     delay(1000);
-    lcd.clear();
+    lcdClear();
 
     printf("Received input: %s\n", input);  // Echo entered code
 

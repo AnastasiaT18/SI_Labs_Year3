@@ -36,9 +36,8 @@ void Task_Stats(void) {
         ledState      = false;
         lastBlinkTime = millis();
 
-        Serial.print("[T2] total="); Serial.print(g_totalPresses);
-        Serial.print(" short=");     Serial.print(g_shortPresses);
-        Serial.print(" long=");      Serial.println(g_longPresses);
+        printf("[T2] total=%lu short=%lu long=%lu\n", g_totalPresses, g_shortPresses, g_longPresses);
+
     }
 
     // non-blocking blink state machine

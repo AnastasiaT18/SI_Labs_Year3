@@ -34,7 +34,6 @@ void Task_Button(void) {
         _ledR->turnOn();
     }
 
-    Serial.print("[T1] ");
-    Serial.print(duration);
-    Serial.println(g_lastPressWasShort ? "ms SHORT" : "ms LONG");
+    printf("[T1] %lums %s\n", duration, g_lastPressWasShort ? "SHORT" : "LONG");
+
 }
