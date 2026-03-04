@@ -1,3 +1,6 @@
+#ifdef RUN_LAB3
+
+
 #include "Task_Stats.h"
 #include "SharedData.h"
 #include <Arduino.h>
@@ -55,3 +58,5 @@ void Task_Stats(void) {
         }
     }
 }
+
+#endif

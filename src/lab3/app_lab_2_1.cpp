@@ -1,3 +1,5 @@
+#ifdef RUN_LAB3
+
 #include "app_lab_2_1.h"
 #include "Scheduler.h"
 #include "Timer.h"
@@ -50,3 +52,5 @@ void appLab21Loop() {
     // intentionally empty
     // everything runs via timer ISR → scheduler
 }
+
+#endif

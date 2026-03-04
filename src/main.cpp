@@ -4,7 +4,8 @@
 
 // #define RUN_LAB1
 // #define RUN_LAB2
-#define RUN_LAB3
+// #define RUN_LAB3
+// #define RUN_LAB4
 
 
 #ifdef RUN_LAB1
@@ -158,5 +159,20 @@ void loop() {
 
     void loop() {
         appLab21Loop();
+    }
+#endif
+
+// ============================================================
+// LAB 4
+// ============================================================
+#ifdef RUN_LAB4
+    #include "lab4/app_lab_2_2.h"
+
+    void setup() {
+        appLab22Setup();
+    }
+
+    void loop() {
+        appLab22Loop();
     }
 #endif

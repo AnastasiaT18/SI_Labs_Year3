@@ -1,3 +1,5 @@
+#ifdef RUN_LAB3
+
 #include "Task_Button.h"
 #include "SharedData.h"
 #include <Arduino.h>
@@ -37,3 +39,4 @@ void Task_Button(void) {
     printf("[T1] %lums %s\n", duration, g_lastPressWasShort ? "SHORT" : "LONG");
 
 }
+#endif

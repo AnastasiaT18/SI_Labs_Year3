@@ -1,3 +1,5 @@
+#ifdef RUN_LAB3
+
 #include "Task_Report.h"
 #include "SharedData.h"
 #include <Arduino.h>
@@ -29,3 +31,5 @@ void Task_Report(void) {
     g_sumShortDuration = 0;
     g_sumLongDuration  = 0;
 }
+
+#endif
