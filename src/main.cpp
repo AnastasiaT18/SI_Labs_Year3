@@ -176,3 +176,9 @@ void loop() {
         appLab22Loop();
     }
 #endif
+
+#ifdef RUN_LAB5
+    #include "lab5/app_lab_3_1.h"
+    void setup() { appLab31Setup(); }
+    void loop()  { appLab31Loop();  }
+#endif

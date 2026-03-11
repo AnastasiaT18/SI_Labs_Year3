@@ -15,7 +15,7 @@
 static LedControl   ledGreen(12);
 static LedControl   ledRed(11);
 static LedControl   ledYellow(10);
-static ButtonSensor button(2);
+static ButtonSensor button(3);
 
 int serial_putchar(char c, FILE* f) {
     Serial.write(c);
