@@ -8,8 +8,7 @@
 // Helper: AVR printf doesn't support %f, so we split into whole + decimal parts
 // e.g. 22.75 → whole=22, dec=75
 static void printTemp(float temp) {
-    if (temp < -100.0) {
-        // -127 means DS18B20 failed to read
+    if (isnan(temp) || temp < -100.0) {
         printf("ERR");
         return;
     }
@@ -21,8 +20,12 @@ static void printTemp(float temp) {
     printf("%d.%02d", whole, dec);
 }
 
-void Task_Report_init() {
-    // nothing to initialize
+static LedControl* _ledNTC;
+static LedControl* _ledDHT;
+
+void Task_Report_init(LedControl* ledNTC, LedControl* ledDHT) {
+    _ledNTC = ledNTC;
+    _ledDHT = ledDHT;
 }
 
 void Task_Report(void* pvParameters) {
@@ -36,9 +39,16 @@ void Task_Report(void* pvParameters) {
         float ntcTemp  = g_ntcTempC;
         int   ntcRaw   = g_ntcRaw;
         bool  ntcAlert = g_ntcAlertActive;
-        float dsTemp   = g_dsTempC;
-        bool  dsAlert  = g_dsAlertActive;
+        float dhtTemp = g_dhtTempC;
+        float dhtHumidity = g_dhtHumidity;
+        bool  dhtAlert = g_dhtAlertActive;
         xSemaphoreGive(xDataMutex);
+
+        if (ntcAlert) _ledNTC->turnOn();
+        else          _ledNTC->turnOff();
+
+        if (dhtAlert) _ledDHT->turnOn();
+        else          _ledDHT->turnOff();
 
         // print combined report
         printf("========================================\n");
@@ -46,12 +56,16 @@ void Task_Report(void* pvParameters) {
         printTemp(ntcTemp);
         printf(" C | Alert: %s\n", ntcAlert ? "!!! HIGH !!!" : "OK");
 
-        printf("[DS18] Temp: ");
-        printTemp(dsTemp);
-        printf(" C | Alert: %s\n", dsAlert ? "!!! HIGH !!!" : "OK");
+        printf("[DHT22] Temp: ");
+        printTemp(dhtTemp);
+        int humWhole = (int)dhtHumidity;
+        int humDec   = (int)((dhtHumidity - humWhole) * 100);
+        printf(" C | Hum: %d.%02d%% | Alert: %s\n",
+            humWhole, humDec, dhtAlert ? "!!! HIGH !!!" : "OK");
 
         printf("  Thresholds: LOW=24.0C  HIGH=26.0C\n");
         printf("========================================\n");
     }
 }
+
 #endif
