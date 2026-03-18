@@ -1,4 +1,3 @@
-#ifdef RUN_LAB5
 
 #include "Task_DHT.h"
 #include "SharedData5.h"
@@ -63,4 +62,3 @@ void Task_DHT(void* pvParameters) {
     }
 }
 
-#endif

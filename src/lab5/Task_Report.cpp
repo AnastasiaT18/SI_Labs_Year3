@@ -56,7 +56,7 @@ void Task_Report(void* pvParameters) {
         printTemp(ntcTemp);
         printf(" C | Alert: %s\n", ntcAlert ? "!!! HIGH !!!" : "OK");
 
-        printf("[DHT22] Temp: ");
+        printf("[DHT11] Temp: ");
         printTemp(dhtTemp);
         int humWhole = (int)dhtHumidity;
         int humDec   = (int)((dhtHumidity - humWhole) * 100);
