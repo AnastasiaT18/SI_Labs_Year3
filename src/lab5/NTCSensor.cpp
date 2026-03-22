@@ -1,11 +1,10 @@
 #include "NTCSensor.h"
 #include <math.h>
 
-// NTC parameters — adjust these if your NTC is different
 #define NTC_BETA      3950.0
 #define NTC_R0        10000.0   // resistance at 25°C
 #define NTC_T0        298.15    // 25°C in Kelvin
-#define NTC_R_FIXED   10000.0   // your fixed resistor in voltage divider
+#define NTC_R_FIXED   10000.0   //  fixed resistor in voltage divider
 #define ADC_MAX       1023.0
 
 NTCSensor::NTCSensor(int pin) : _pin(pin) {}

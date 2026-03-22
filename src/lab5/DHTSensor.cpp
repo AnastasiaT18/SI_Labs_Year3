@@ -1,7 +1,7 @@
 #include "DHTSensor.h"
 
 DHTSensor::DHTSensor(int pin)
-    : _dht(pin, DHT22) {}
+    : _dht(pin, DHT11) {}
 
 void DHTSensor::begin() {
     _dht.begin();

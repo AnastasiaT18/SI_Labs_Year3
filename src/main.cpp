@@ -196,3 +196,12 @@ void loop() {
     void setup() { appLab32Setup(); }
     void loop()  { appLab32Loop();  }
 #endif
+
+// ============================================================
+// LAB 7
+// ============================================================
+#ifdef RUN_LAB7
+    #include "lab7/app_lab_4_1.h"
+    void setup() { appLab41Setup(); }
+    void loop()  { appLab41Loop();  }
+#endif

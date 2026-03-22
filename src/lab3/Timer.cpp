@@ -1,3 +1,5 @@
+#ifdef RUN_LAB3
+
 #include "Timer.h"
 #include "Scheduler.h"
 
@@ -12,3 +14,5 @@ void timer1_init(void) {
 ISR(TIMER1_COMPA_vect) { //the vector name the compiler uses to map this function to the correct interrupt vector table address. The hardware knows to jump here when Timer1 compare match fires.
     os_seq_scheduler_loop();      // called every 1ms by hardware
 }
+
+#endif
