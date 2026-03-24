@@ -1,14 +1,14 @@
-#ifdef RUN_LAB7
+#ifdef RUN_LAB8
 
-#include "app_lab_4_1.h"
+#include "app_lab_4_2.h"
 #include "SharedData.h"
 #include "Task_Command.h"
-#include "Task_Relay.h"
+#include "lab7/Task_Relay.h"
 #include "Task_Servo.h"
 #include "Task_Report.h"
-#include "RelayDriver.h"
-#include "ServoDriver.h"
-#include "LCDDisplay.h"
+#include "lab7/RelayDriver.h"
+#include "lab7/ServoDriver.h"
+#include "lab7/LCDDisplay.h"
 #include <stdio.h>
 
 // hardware objects
@@ -32,7 +32,7 @@ int serial_getchar(FILE* f) {
 
 FILE serial_stdout;
 
-void appLab41Setup() {
+void appLab42Setup() {
     Serial.begin(9600);
     fdev_setup_stream(&serial_stdout, serial_putchar, serial_getchar, _FDEV_SETUP_RW);
     stdout = &serial_stdout;
@@ -60,14 +60,14 @@ void appLab41Setup() {
     xTaskCreate(Task_Servo,   "SERVO",  256, NULL, 2, NULL);
     xTaskCreate(Task_Report,  "REPORT", 512, NULL, 1, NULL);
 
-    printf("=== Lab 4 Part 1 Ready ===\n");
+    printf("=== Lab 4 Part 2 Ready ===\n");
     printf("Commands: relay on/off, servo 0-1\n");
     printf("==========================\n");
 
     vTaskStartScheduler();
 }
 
-void appLab41Loop() {
+void appLab42Loop() {
     // intentionally empty
 }
 

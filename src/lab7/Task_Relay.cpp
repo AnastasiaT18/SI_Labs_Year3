@@ -1,4 +1,4 @@
-#ifdef RUN_LAB7
+#if defined(RUN_LAB7) || defined(RUN_LAB8)
 
 #include "Task_Relay.h"
 #include "SharedData.h"
