@@ -27,7 +27,7 @@ void Task_Relay(void* pvParameters) {
         xSemaphoreGive(xDataMutex);
 
         if (cmd == -1) continue;
-        printf("RELAY got cmd: %d counter: %d\n", cmd, debounceCount); // debug
+        // printf("RELAY got cmd: %d counter: %d\n", cmd, debounceCount); // debug
 
 
         if (cmd != pendingCmd) {

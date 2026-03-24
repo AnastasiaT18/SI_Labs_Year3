@@ -8,89 +8,53 @@
 
 void Task_Command_init() {}
 
-// void Task_Command(void* pvParameters) {
-//     char input[32];
-
-//     while (true) {
-//         // blocks here waiting for input — other tasks keep running
-//         scanf("%31s", input);
-        
-//         String cmd = String(input);
-//         cmd.toLowerCase();
-
-//         // read second word if needed
-//         char arg[16] = "";
-//         if (cmd == "relay" || cmd == "servo") {
-//             scanf("%15s", arg);
-//         }
-
-//         xSemaphoreTake(xDataMutex, portMAX_DELAY);
-
-//         if (cmd == "relay") {
-//             String a = String(arg);
-//             a.toLowerCase();
-//             if (a == "on") {
-//                 g_relayCommand = 1;
-//                 printf("CMD: relay -> ON\n");
-//             } else if (a == "off") {
-//                 g_relayCommand = 0;
-//                 printf("CMD: relay -> OFF\n");
-//             } else {
-//                 printf("CMD ERR: use 'relay on' or 'relay off'\n");
-//             }
-//         } else if (cmd == "servo") {
-//             int angle = String(arg).toInt();
-//             if (angle >= 0 && angle <= 180) {
-//                 g_servoCommand = angle;
-//                 printf("CMD: servo -> %d deg\n", angle);
-//             } else {
-//                 printf("CMD ERR: servo must be 0-180\n");
-//             }
-//         } else {
-//             printf("CMD ERR: unknown. Use: relay on/off, servo 0-180\n");
-//         }
-
-//         xSemaphoreGive(xDataMutex);
-//     }
-// }
-
 void Task_Command(void* pvParameters) {
-    TickType_t xLastWakeTime = xTaskGetTickCount();
+    char cmd[16];
+    char arg[16];
 
     while (true) {
-        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(50));
+        // reads from Serial via stdin/STDIO redirection
+        // yields automatically inside serial_getchar while waiting
+        printf("Enter command: ");
+        
+        scanf("%15s", cmd);   // reads first word e.g. "relay" or "servo"
+        
+        String c = String(cmd);
+        c.toLowerCase();
 
-        if (Serial.available() > 0) {
-            String input = Serial.readStringUntil('\n');
-            input.trim();
-            input.toLowerCase();
+        if (c == "relay") {
+            scanf("%15s", arg);  // reads second word "on" or "off"
+            String a = String(arg);
+            a.toLowerCase();
 
-            if (input == "relay on") {
-                xSemaphoreTake(xDataMutex, portMAX_DELAY);
+            xSemaphoreTake(xDataMutex, portMAX_DELAY);
+            if (a == "on") {
                 g_relayCommand = 1;
-                xSemaphoreGive(xDataMutex);
                 printf("CMD: relay -> ON\n");
-
-            } else if (input == "relay off") {
-                xSemaphoreTake(xDataMutex, portMAX_DELAY);
+            } else if (a == "off") {
                 g_relayCommand = 0;
-                xSemaphoreGive(xDataMutex);
                 printf("CMD: relay -> OFF\n");
-
-            } else if (input.startsWith("servo ")) {
-                int angle = input.substring(6).toInt();
-                if (angle >= 0 && angle <= 180) {
-                    xSemaphoreTake(xDataMutex, portMAX_DELAY);
-                    g_servoCommand = angle;
-                    xSemaphoreGive(xDataMutex);
-                    printf("CMD: servo -> %d deg\n", angle);
-                } else {
-                    printf("CMD ERR: servo must be 0-180\n");
-                }
             } else {
-                printf("CMD ERR: unknown\n");
-                printf("Use: 'relay on', 'relay off', 'servo 0-180'\n");
+                printf("CMD ERR: use 'relay on' or 'relay off'\n");
             }
+            xSemaphoreGive(xDataMutex);
+
+        } else if (c == "servo") {
+            scanf("%15s", arg);  // reads angle e.g. "90"
+            int angle = String(arg).toInt();
+
+            if (angle >= 0 && angle <= 180) {
+                xSemaphoreTake(xDataMutex, portMAX_DELAY);
+                g_servoCommand = angle;
+                xSemaphoreGive(xDataMutex);
+                printf("CMD: servo -> %d deg\n", angle);
+            } else {
+                printf("CMD ERR: servo must be 0-180\n");
+            }
+
+        } else {
+            printf("CMD ERR: unknown '%s'\n", cmd);
+            printf("Use: 'relay on', 'relay off', 'servo 0-180'\n");
         }
     }
 }

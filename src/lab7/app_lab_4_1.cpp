@@ -18,13 +18,13 @@ static LCDDisplay  lcd(0x27, 16, 2);
 
 // STDIO redirect — both input and output through Serial
 int serial_putchar(char c, FILE* f) {
-    Serial.write(c);
-    return c;
+    if (c == '\n') Serial.write('\r');
+    return Serial.write(c);
 }
 
 int serial_getchar(FILE* f) {
     while (!Serial.available()) {
-        vTaskDelay(pdMS_TO_TICKS(10)); // yield while waiting
+        vTaskDelay(pdMS_TO_TICKS(50)); // yield while waiting
     }
     return Serial.read();
 }
@@ -55,7 +55,7 @@ void appLab41Setup() {
     Task_Report_init(&lcd);
 
     // create tasks
-    xTaskCreate(Task_Command, "CMD",    256, NULL, 3, NULL);
+    xTaskCreate(Task_Command, "CMD",    256, NULL, 1, NULL);
     xTaskCreate(Task_Relay,   "RELAY",  256, NULL, 2, NULL);
     xTaskCreate(Task_Servo,   "SERVO",  256, NULL, 2, NULL);
     xTaskCreate(Task_Report,  "REPORT", 512, NULL, 1, NULL);
