@@ -7,8 +7,9 @@
     { "type": "wokwi-relay-module", "id": "relay1", "top": 0, "left": 0, "attrs": {} },
     { "type": "wokwi-resistor", "id": "r1", "top": 0, "left": 250, "attrs": { "value": "220" } },
     { "type": "wokwi-led", "id": "led1", "top": 0, "left": 400, "attrs": { "color": "red" } },
-    { "type": "wokwi-servo", "id": "servo1", "top": 0, "left": 550, "attrs": {} },
-    { "type": "wokwi-lcd1602", "id": "lcd1", "top": 100, "left": 700, "attrs": { "pins": "i2c", "address": "0x27" } }
+    { "type": "wokwi-resistor", "id": "r2", "top": 0, "left": 550, "attrs": { "value": "100" } },
+    { "type": "wokwi-led", "id": "led2", "top": 0, "left": 700, "attrs": { "color": "green" } },
+    { "type": "wokwi-lcd1602", "id": "lcd1", "top": 100, "left": 850, "attrs": { "pins": "i2c", "address": "0x27" } }
   ],
   "connections": [
     ["relay1:VCC",  "mega:5V",    "red",    []],
@@ -18,9 +19,9 @@
     ["relay1:NO",   "r1:1",       "orange", []],
     ["r1:2",        "led1:A",     "orange", []],
     ["led1:C",      "mega:GND.2", "black",  []],
-    ["servo1:PWM",  "mega:9",     "orange", []],
-    ["servo1:V+",   "mega:5V",    "red",    []],
-    ["servo1:GND",  "mega:GND.3", "black",  []],
+    ["mega:6",      "r2:1",       "orange", []],
+    ["r2:2",        "led2:A",     "orange", []],
+    ["led2:C",      "mega:GND.3", "black",  []],
     ["lcd1:VCC",    "mega:5V",    "red",    []],
     ["lcd1:GND",    "mega:GND.4", "black",  []],
     ["lcd1:SDA",    "mega:20",    "blue",   []],

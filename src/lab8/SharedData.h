@@ -10,13 +10,13 @@ extern volatile int  g_relayCommand;
 extern volatile bool g_relayState;
 extern volatile bool g_relayAlert;
 
-// Servo shared data
-extern volatile int   g_servoCommand;     // raw command from Task_Command (0-180)
-extern volatile int   g_servoSaturated;   // after saturation
-extern volatile int   g_servoMedian;      // after median filter
-extern volatile float g_servoWeighted;    // after weighted average
-extern volatile int   g_servoAngle;       // final applied angle (after ramp)
-extern volatile bool  g_servoAlert;       // true if limit was hit (saturated)
+// Motor shared data
+extern volatile int   g_motorCommand;     // raw command 0-100%, -1=none
+extern volatile int   g_motorSaturated;   // after saturation
+extern volatile int   g_motorMedian;      // after median filter
+extern volatile float g_motorWeighted;    // after weighted average
+extern volatile int   g_motorSpeed;       // final applied speed % (after ramp)
+extern volatile bool  g_motorAlert;       // true if limit was hit (saturated)
 
 // Synchronization
 extern SemaphoreHandle_t xDataMutex;

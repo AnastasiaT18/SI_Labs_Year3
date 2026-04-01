@@ -6,12 +6,12 @@ volatile int  g_relayCommand   = -1;
 volatile bool g_relayState     = false;
 volatile bool g_relayAlert     = false;
 
-volatile int   g_servoCommand  = -1;
-volatile int   g_servoSaturated = 0;
-volatile int   g_servoMedian   = 0;
-volatile float g_servoWeighted = 0.0f;
-volatile int   g_servoAngle    = 0;
-volatile bool  g_servoAlert    = false;
+volatile int   g_motorCommand   = -1;
+volatile int   g_motorSaturated = 0;
+volatile int   g_motorMedian    = 0;
+volatile float g_motorWeighted  = 0.0f;
+volatile int   g_motorSpeed     = 0;
+volatile bool  g_motorAlert     = false;
 
 SemaphoreHandle_t xDataMutex = NULL;
 

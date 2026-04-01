@@ -13,7 +13,7 @@
 
 // hardware objects
 static RelayDriver relay(7);
-static ServoDriver servo(9);
+static ServoDriver servo(6);
 static LCDDisplay  lcd(0x27, 16, 2);
 
 // STDIO redirect — both input and output through Serial

@@ -36,24 +36,22 @@ void Task_Command(void* pvParameters) {
             }
             xSemaphoreGive(xDataMutex);
 
-        } else if (c == "servo") {
-            // accepts 0-100 percent, mapped to 0-180 degrees
+        } else if (c == "motor") {
             scanf("%15s", arg);
-            int percent = String(arg).toInt();
+            int speed = String(arg).toInt();
 
-            if (percent >= 0 && percent <= 100) {
-                int angle = (int)((percent / 100.0f) * 180.0f + 0.5f);
+            if (speed >= 0 && speed <= 100) {
                 xSemaphoreTake(xDataMutex, portMAX_DELAY);
-                g_servoCommand = angle;
+                g_motorCommand = speed;
                 xSemaphoreGive(xDataMutex);
-                printf("CMD: servo -> %d%% (%d deg)\n", percent, angle);
+                printf("CMD: motor -> %d%%\n", speed);
             } else {
-                printf("CMD ERR: servo must be 0-100 (percent)\n");
+                printf("CMD ERR: motor must be 0-100 (percent)\n");
             }
 
         } else {
             printf("CMD ERR: unknown '%s'\n", cmd);
-            printf("Use: 'relay on', 'relay off', 'servo 0-100'\n");
+            printf("Use: 'relay on', 'relay off', 'motor 0-100'\n");
         }
     }
 }
