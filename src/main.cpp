@@ -215,3 +215,13 @@ void loop() {
     void setup() { appLab42Setup(); }
     void loop()  { appLab42Loop();  }
 #endif
+
+
+// ============================================================
+// LAB 9
+// ============================================================
+#ifdef RUN_LAB9
+    #include "lab9/app_lab_5_1.h"
+    void setup() { appLab51Setup(); }
+    void loop()  { appLab51Loop();  }
+#endif
