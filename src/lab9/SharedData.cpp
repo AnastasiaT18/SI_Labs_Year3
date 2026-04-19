@@ -4,8 +4,8 @@
 
 SemaphoreHandle_t xDataMutex = NULL;
 
-volatile float g_setPoint    = 28.0f;
-volatile float g_hysteresis  = 1.0f;
+volatile float g_setPoint  = 32.0f;   // ~10°C above room temp, reachable by a small resistor
+volatile float g_hysteresis = 1.0f;   // unchanged
 
 volatile float g_temperature = 0.0f;
 volatile float g_humidity    = 0.0f;

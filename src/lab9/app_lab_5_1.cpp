@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 // ── Hardware objects ──────────────────────────────────────────────
-static DHTSensor   dht(18);              // DHT11 data pin D2
+static DHTSensor   dht(17);              // DHT11 data pin D2
 static RelayDriver relay(7);            // Relay IN pin D3
 static LCDDisplay  lcd(0x27, 16, 2);   // I2C LCD 16x2
 
@@ -60,7 +60,7 @@ void appLab51Setup() {
     xTaskCreate(Task_Report,  "REPORT",  768,  NULL,  1,    NULL);
 
     printf("=== Lab 9: ON-OFF Hysteresis Control ===\n");
-    printf("Sensor: DHT11  Actuator: Relay\n");
+    printf("Sensor: DHT11 (near heater)  Actuator: Relay+Resistor\n");
     printf("Default SP=%.1f C  HYS=%.1f C\n", (double)g_setPoint, (double)g_hysteresis);
     printf("========================================\n");
 
