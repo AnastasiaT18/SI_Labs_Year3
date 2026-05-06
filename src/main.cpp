@@ -225,3 +225,12 @@ void loop() {
     void setup() { appLab51Setup(); }
     void loop()  { appLab51Loop();  }
 #endif
+
+// ============================================================
+// LAB 10
+// ============================================================
+#ifdef RUN_LAB10
+    #include "lab10/app_lab_5_2.h"
+    void setup() { appLab52Setup(); }
+    void loop()  { appLab52Loop();  }
+#endif
