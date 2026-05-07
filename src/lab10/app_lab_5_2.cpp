@@ -12,7 +12,7 @@
 #include <stdio.h>
 
 // ── Hardware objects ──────────────────────────────────────────────
-static DHTSensor   dht(18);              // DHT11 data pin D2
+static DHTSensor   dht(17);              // DHT11 data pin D2
 static RelayDriver relay(7);            // Relay IN pin D3
 static LCDDisplay  lcd(0x27, 16, 2);   // I2C LCD 16x2
 

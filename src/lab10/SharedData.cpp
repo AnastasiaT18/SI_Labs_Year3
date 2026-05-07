@@ -5,7 +5,7 @@
 SemaphoreHandle_t xDataMutex = NULL;
 
 volatile float g_setPoint  = 26.0f;   
-volatile float g_hysteresis = 1.0f;   // unchanged
+volatile float g_hysteresis = 0.5f;   // unchanged
 
 volatile float g_temperature = 0.0f;
 volatile float g_humidity    = 0.0f;

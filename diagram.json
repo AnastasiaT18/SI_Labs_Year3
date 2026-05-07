@@ -6,64 +6,50 @@
     {
       "type": "wokwi-arduino-mega",
       "id": "mega",
-      "top": 0,
+      "top": 200,
       "left": 0,
       "attrs": {}
     },
     {
-      "type": "wokwi-dht22",
-      "id": "dht1",
-      "top": -120,
-      "left": 350,
-      "attrs": { "temperature": "22", "humidity": "50" }
-    },
-    {
-      "type": "wokwi-relay-module",
-      "id": "relay1",
-      "top": -120,
-      "left": 500,
-      "attrs": {}
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 20,
+      "left": 50,
+      "rotate": 90,
+      "attrs": { "color": "green" }
     },
     {
       "type": "wokwi-resistor",
-      "id": "heater",
-      "top": 60,
-      "left": 500,
-      "attrs": { "value": "100" }
+      "id": "r1",
+      "top": 20,
+      "left": 230,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": 20,
+      "left": 380,
+      "attrs": { "color": "red" }
     },
     {
       "type": "wokwi-lcd1602",
       "id": "lcd1",
-      "top": 200,
-      "left": 350,
-      "attrs": { "address": "0x27" }
-    },
-    {
-      "type": "wokwi-resistor",
-      "id": "pullup",
-      "top": -160,
-      "left": 390,
-      "attrs": { "value": "10000" }
+      "top": 20,
+      "left": 520,
+      "attrs": { "pins": "i2c", "address": "0x27" }
     }
   ],
   "connections": [
-    ["mega:GND.1",   "dht1:GND",    "black",  []],
-    ["mega:5V",      "dht1:VCC",    "red",    []],
-    ["mega:18",      "dht1:SDA",    "green",  []],
-    ["dht1:VCC",     "pullup:1",    "red",    []],
-    ["pullup:2",     "dht1:SDA",    "orange", []],
-
-    ["mega:GND.2",   "relay1:GND",  "black",  []],
-    ["mega:5V",      "relay1:VCC",  "red",    []],
-    ["mega:7",       "relay1:IN",   "yellow", []],
-
-    ["mega:5V",      "relay1:COM",  "red",    []],
-    ["relay1:NO",    "heater:1",    "orange", []],
-    ["heater:2",     "mega:GND.3",  "black",  []],
-
-    ["mega:20",      "lcd1:SDA",    "blue",   []],
-    ["mega:21",      "lcd1:SCL",    "purple", []],
-    ["mega:GND.4",   "lcd1:VSS",    "black",  []],
-    ["mega:5V",      "lcd1:VDD",    "red",    []]
-  ]
+    ["btn1:1.l", "mega:GND.1", "black",  []],
+    ["btn1:2.l", "mega:2",     "green",  []],
+    ["mega:13",  "r1:1",       "orange", []],
+    ["r1:2",     "led1:A",     "orange", []],
+    ["led1:C",   "mega:GND.2", "black",  []],
+    ["lcd1:VCC", "mega:5V",    "red",    []],
+    ["lcd1:GND", "mega:GND.3", "black",  []],
+    ["lcd1:SDA", "mega:20",    "blue",   []],
+    ["lcd1:SCL", "mega:21",    "yellow", []]
+  ],
+  "dependencies": {}
 }
